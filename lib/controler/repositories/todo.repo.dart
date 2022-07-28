@@ -2,6 +2,17 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:todo/model/todo.model.dart';
 
 class TodoRepository {
+  
+  late Database database;
+  List<Map> tasks = [];
+  List<Map> tasksComplete = [];
+  List<Map> tasksUnComplete = [];
+  List<Map> tasksFavorite = [];
+  List<Map> tasksSelectedDate = [];
+  String selectedDate = '';
+  
+  
+  
   Future<List<Todo>> getTodos({
     required Database database,
   }) async {
@@ -47,5 +58,6 @@ class TodoRepository {
     return await database.transaction((txn) async {
       await txn.rawDelete('DELETE FROM todo where id = $id');
     });
+    
   }
 }
